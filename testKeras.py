@@ -76,13 +76,13 @@ def getDataGenerator(train_phase,rescale=1./255):
 
 # --------------------------------------------------   model init    --------------------------------------------------
 
-def FC2():
+def FC2(num_classes=10,img_dim=(28,28,1)):
 	model = Sequential()
 	# relu sigmoid
-	model.add(Flatten(input_shape=(28,28,1,)))
-	model.add(Dense(512, activation='relu'))
+	model.add(Flatten(input_shape=img_dim))
+	model.add(Dense(50, activation='relu'))
 	# model.add(Dropout(0.2))
-	model.add(Dense(512, activation='relu'))
+	# model.add(Dense(100, activation='relu'))
 	# model.add(Dropout(0.2))
 	model.add(Dense(num_classes, activation='softmax'))
 	# model.summary()
@@ -386,13 +386,13 @@ def evaluateModel(x_test, labels,saveFile='model.h5'):
 	return score
 
 def drawMap(modle):
-	
+	pass
 
 # --------------------------------------------------   train function    --------------------------------------------------
 
 def testKeras():
 	x_train,y_train,x_test,y_test = MNIST()
-	model = LeNet(img_dim=(28,28,1))
+	model = FC2(img_dim=(28,28,1))
 	model.summary()
 	model.compile(loss='categorical_crossentropy',
 				  optimizer=RMSprop(),
